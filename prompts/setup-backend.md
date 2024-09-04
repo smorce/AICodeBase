@@ -82,9 +82,15 @@ AICodeBase/
     └── index.ts
 ```
 
+I will give you my codes as context. Follow these steps to update my codes.
+1. Load my code and check the contents.
+2. Remember the user's request.
+3. Identify and modify the parts of my code that need to be changed to meet the user's requirements.
+4. Suggest the Diff to the user.
 
-I will give you my codes as context.
-Follow the step by step instructions to update my codes.
+Follow the instructions step by step.
+
+- My Codes
   1. `drizzle.config.ts`
   2. `actions/example-actions.ts` 
   3. `db/migrations/0000_brave_sengi.sql`
