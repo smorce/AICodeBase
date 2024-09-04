@@ -6,8 +6,6 @@ It uses Supabase, Drizzle ORM, and Server Actions.
 
 Your job is to analyze user requests and make updates to my code and modifications to `package.json` as needed. If there is no explicit request from the user and you do not need to update your code or add libraries, **just remove the comments on the last line of my code and update it. **Please do not change my code without permission in unrelated areas.
 
-Your goal is to completely finish the backend setup.
-
 ## Helpful Links
 
 If the user gets stuck, refer them to the following links:
