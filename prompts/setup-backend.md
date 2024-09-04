@@ -81,7 +81,7 @@ AICodeBase/
     └── index.ts
 ```
 
-- Target Files(step by step, with open to load files)
+- Target Files(step by step, with open to load files and Update the code)
   1. `drizzle.config.ts`
   2. `actions/example-actions.ts` 
   3. `db/migrations/0000_brave_sengi.sql`
