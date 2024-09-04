@@ -4,9 +4,9 @@ Use this guide to setup the backend for this project.
 
 It uses Supabase, Drizzle ORM, and Server Actions.
 
-A code template is provided for you.
+A code templates is provided for you.
 
-Your job is to analyze user requests and make modifications to the code template as needed. If there is no explicit request from the user or the code does not need to be modified, only perform the modification to remove the comment on the last line of code.
+Your job is to analyze user requests and make modifications to the code templates as needed. If there is no explicit request from the user or the code does not need to be modified, only perform the modification to remove the comment on the last line of code.
 
 Your goal is to completely finish the backend setup.
 
@@ -35,7 +35,7 @@ npm i drizzle-orm dotenv postgres
 npm i -D drizzle-kit
 ```
 
-## Code Template
+## Code Templates
 
 - `Directory Structure`
 ```Directory Structure
