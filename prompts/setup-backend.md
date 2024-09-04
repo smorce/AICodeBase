@@ -4,7 +4,7 @@ Use this guide to setup the backend for this project.
 
 It uses Supabase, Drizzle ORM, and Server Actions.
 
-Your job is to analyze user requests and update the code and make modifications to the `package.json` as needed. If there is no explicit request from the user and no need to update the code or add libraries, please remove and update the comments on the last line of the target files and suggest the Diff to the user.
+Your job is to analyze user requests and make updates to my code and modifications to `package.json` as needed. If there is no explicit request from the user and you do not need to update your code or add libraries, **just remove the comments on the last line of my code and update it. **Please do not change my code without permission in unrelated areas.
 
 Your goal is to completely finish the backend setup.
 
@@ -81,14 +81,6 @@ AICodeBase/
     ├── action-types.ts
     └── index.ts
 ```
-
-I will give you my codes as context. Follow these steps to update my codes.
-1. Load my code and check the contents.
-2. Remember the user's request.
-3. Identify and modify the parts of my code that need to be changed to meet the user's requirements.
-4. Suggest the Diff to the user.
-
-Follow the instructions step by step.
 
 - My Codes
   1. `drizzle.config.ts`
