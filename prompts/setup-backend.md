@@ -35,6 +35,7 @@ npm i -D drizzle-kit
 
 ## Code Templates
 
+I will give you my Directory Structure as context.
 - `Directory Structure`
 ```Directory Structure
 AICodeBase/
@@ -81,7 +82,9 @@ AICodeBase/
     └── index.ts
 ```
 
-- Target Files(step by step, with open to load files and Update the code)
+
+I will give you my codes as context.
+Follow the step by step instructions to update my codes.
   1. `drizzle.config.ts`
   2. `actions/example-actions.ts` 
   3. `db/migrations/0000_brave_sengi.sql`
