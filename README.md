@@ -1,3 +1,15 @@
+<p align="center">
+<img src="https://huggingface.co/datasets/smorce/IconAssets/resolve/2d4924e59be287682696c4407f0a26e73218b4da/AICodeBase_Header_image.png" width="100%">
+<h1 align="center">AICodeBase</h1>
+<p align="center">
+  <a href="https://note.com/smorce/"><b>[🌐 Website]</b></a> •
+  <a href="https://github.com/smorce"><b>[🐱 GitHub]</b></a>
+  <a href="https://x.com/smorce1"><b>[🐦 Twitter]</b></a> •
+  <a href="https://note.com/smorce/"><b>[🍀 Official Blog]</b></a>
+</p>
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

@@ -37,6 +37,7 @@ npm i -D drizzle-kit
 
 ## Code Template
 
+- `Directory Structure`
 ```Directory Structure
 AICodeBase/
 ├── actions
@@ -83,6 +84,7 @@ AICodeBase/
 ```
 
 
+- `drizzle.config.ts`
 ```drizzle.config.ts
 import { config } from "dotenv";
 import { defineConfig } from "drizzle-kit";
@@ -101,6 +103,7 @@ export default defineConfig({
 ```
 
 
+- `package.json`
 ```package.json
 {
   "name": "test-supabk",
@@ -133,6 +136,7 @@ export default defineConfig({
 ```
 
 
+- `actions/example-actions.ts` 
 ```actions/example-actions.ts
 "use server";
 
@@ -192,6 +196,7 @@ export async function deleteExampleAction(id: string): Promise<ActionState> {
 ```
 
 
+- `db/migrations/0000_brave_sengi.sql`
 ```db/migrations/0000_brave_sengi.sql
 CREATE TABLE "example" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -205,6 +210,7 @@ CREATE TABLE "example" (
 ```
 
 
+- `db/queries/example-queries.ts`
 ```db/queries/example-queries.ts
 "use server";
 
@@ -264,6 +270,7 @@ export const deleteExample = async (id: string) => {
 ```
 
 
+- `db/schema/example-schema.ts`
 ```db/schema/example-schema.ts
 import { integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
@@ -285,12 +292,14 @@ export type SelectExample = typeof exampleTable.$inferSelect;
 ```
 
 
+- `db/schema/index.ts`
 ```db/schema/index.ts
 export * from "./example-schema";
 // WARNING: この行は古いコードなので削除が必要
 ```
 
 
+- `db/db.ts`
 ```db/db.ts
 import { config } from "dotenv";
 import { drizzle } from "drizzle-orm/postgres-js";
@@ -310,6 +319,7 @@ export const db = drizzle(client, { schema });
 ```
 
 
+- `types/action-types.ts`
 ```types/action-types.ts
 export type ActionState = {
     status: "success" | "error";
@@ -320,10 +330,12 @@ export type ActionState = {
 ```
 
 
+- `types/index.ts`
 ```types/index.ts
 export * from "./action-types";
 // WARNING: この行は古いコードなので削除が必要
 ```
+
 
 ## Command Instructions
 
