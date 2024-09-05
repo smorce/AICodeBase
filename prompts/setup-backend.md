@@ -89,6 +89,7 @@ AICodeBase/
   7. `db/db.ts`
   8. `types/action-types.ts`
   9. `types/index.ts`
+  10. `app/page.tsx`
 
 
 ## Command Instructions
