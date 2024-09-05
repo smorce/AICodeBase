@@ -1,12 +1,9 @@
-# Frontend Setup Instructions
+# Instructions
 
-Use this guide to setup the frontend for this project.
+Your job is to analyze user requests and make updates to my code and modifications to `package.json` as needed. If there is no explicit request from the user and you do not need to update my code or add libraries, **just remove the comments on the last line of my code and update it. **Please do not change my code without permission in unrelated areas.
 
-It uses Next.js, Tailwind, Shadcn, and Framer Motion.
-
-Write the complete code for every step. Do not get lazy. Write everything that is needed.
-
-Your goal is to completely finish the frontend setup.
+## Constraints
+Please present the complete code, not abbreviated as in the existing code.
 
 ## Helpful Links
 
@@ -35,57 +32,63 @@ Make sure the user knows to install the following libraries:
 npm i framer-motion
 ```
 
-## Setup Steps
+## Code Templates
 
-- Create a `/components/utilities` folder
-
-- Add a component called `providers.tsx` to the `/components/utilities` folder with the following code:
-
-```tsx
-"use client";
-
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { ThemeProviderProps } from "next-themes/dist/types";
-
-export const Providers = ({ children, ...props }: ThemeProviderProps) => {
-  return (
-    <NextThemesProvider {...props}>
-      <TooltipProvider>{children}</TooltipProvider>
-    </NextThemesProvider>
-  );
-};
+I will give you my Directory Structure as context.
+- `Directory Structure`
+```Directory Structure
+AICodeBase/
+├── actions
+│   └── example-actions.ts
+├── app
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── backend
+├── db
+│   ├── db.ts
+│   ├── migrations
+│   │   └── 0000_brave_sengi.sql
+│   ├── queries
+│   │   └── example-queries.ts
+│   └── schema
+│       ├── example-schema.ts
+│       └── index.ts
+├── .env.local
+├── .gitignore
+├── components
+│   └── utilities
+│       └── providers.tsx
+├── drizzle.config.ts
+├── next.config.mjs
+├── next-env.d.ts
+├── node_modules
+├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── prompts
+│   ├── setup-backend.md
+│   ├── setup-frontend.md
+│   ├── setup-payments.md
+│   ├── setup-project.md
+│   └── setup-supabase-auth.md
+├── public
+│   ├── next.svg
+│   └── vercel.svg
+├── README.md
+├── tailwind.config.ts
+├── tsconfig.json
+└── types
+    ├── action-types.ts
+    └── index.ts
 ```
 
-- In the `app/layout.tsx` file, wrap the `Providers` component around the children with the following code:
+- My Codes
+  1. `components/utilities/providers.tsx`
+  2. `app/layout.tsx`
+  3. `app/page.tsx`
 
-- Make sure to import the `Toaster` component from `import { Toaster } from "@/components/ui/toaster";`
-
-```tsx
-<body className={inter.className}>
-  <Providers
-    attribute="class"
-    defaultTheme="dark"
-    disableTransitionOnChange
-  >
-    {children}
-    <Toaster />
-  </Providers>
-</body>
-```
-
-- Remove the code from the `app/page.tsx` file so that it just renders the `main` tag:
-
-```tsx
-"use client";
-
-export default function HomePage() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>Hello World</div>
-    </main>
-  );
-}
-```
+## Finish
 
 - The frontend is now setup.
