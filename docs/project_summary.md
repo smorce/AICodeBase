@@ -5,8 +5,13 @@
 ```Directory Structure
 AICodeBase/
 ├── actions
-│   └── example-actions.ts
+│   ├── favicon.ico
+│   └── stripe-actions.ts
 ├── app
+│   ├── api
+│   │   └── stripe
+│   │       └── webhooks
+│   │           └── route.ts
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
@@ -23,7 +28,12 @@ AICodeBase/
 │       └── index.ts
 ├── .env.local
 ├── .gitignore
+├── components
+│   └── utilities
+│       └── providers.tsx
 ├── drizzle.config.ts
+├── lib
+│   └── stripe.ts
 ├── next.config.mjs
 ├── next-env.d.ts
 ├── node_modules
@@ -52,9 +62,59 @@ AICodeBase/
 このコードは、Next.jsのサーバーコンポーネントで実行されるであろう、Example データを管理するための一連のアクションを定義しています。各アクションは、データベースとのやり取りを行い、Example の作成、取得、更新、削除といった操作を実行します。アクションは非同期で実行され、成功または失敗を示す ActionState オブジェクトを返します。また、必要に応じて Next.js の revalidatePath 関数を使用して、関連するページのキャッシュを無効化し、再検証をトリガーします。
 ```
 
+- `actions/stripe-actions.ts`
+```plaintext
+このコードは、Stripeのサブスクリプションイベントを処理するためのアクションを定義しています。具体的には、ユーザーのStripe顧客情報を更新する updateStripeCustomer 関数と、サブスクリプションのステータス変更を管理する manageSubscriptionStatusChange 関数が含まれています。
+
+- getMembershipStatus: Stripeのサブスクリプションステータスに基づいて、ユーザーのメンバーシップステータスを決定する関数。
+- updateStripeCustomer: ユーザーのプロフィールを更新し、Stripeの顧客IDとサブスクリプションIDを保存します。
+  - profileId: ユーザーのプロフィールID。
+  - subscriptionId: StripeのサブスクリプションID。
+  - customerId: Stripeの顧客ID。
+- manageSubscriptionStatusChange: サブスクリプションのステータス変更に基づいて、ユーザーのメンバーシップステータスを更新します。
+  - subscriptionId: StripeのサブスクリプションID。
+  - customerId: Stripeの顧客ID。
+  - productId: Stripeの製品ID。
+```
+
 - `app/page.tsx`
 ```plaintext
 このコードは、Next.jsアプリケーションのホーム画面のコンポーネントを定義しています。このコンポーネントは、ユーザーがデータベース内の"example"エンティティを作成、読み取り、更新、削除するためのインターフェースを提供します。ユーザーはフォームを使用して新しいエンティティを作成し、IDで既存のエンティティを取得し、既存のエンティティを更新し、IDでエンティティを削除することができます。各アクションの結果は、ページに表示されます。
+```
+
+- `app/layout.tsx`
+```plaintext
+このコードは、Next.js アプリケーションのルートレイアウトを定義しています。アプリケーション全体の共通レイアウト、フォント、スタイル、コンテキストプロバイダーなどを設定します。
+
+- metadata: アプリケーションのメタデータを定義 (タイトル、説明など)
+- RootLayout: アプリケーションのルートレイアウトコンポーネント。
+- Providers: Shadcn/ui のテーマやコンテキストを提供するコンポーネントをラップしています。
+- Toaster: Shadcn/ui のトースト通知を表示するためのコンポーネント。
+- children: 各ページのコンテンツがここにレンダリングされます。
+- inter: Google Fonts の Inter フォントを読み込んで適用しています。
+- globals.css: アプリケーション全体のグローバルスタイルをインポートしています。
+```
+
+- `app/api/stripe/webhooks/route.ts`
+```plaintext
+このコードは、Stripe webhook イベントを処理するための Next.js API ルートを定義しています。Stripe から送信されたイベントを検証し、関連するイベント（サブスクリプションの更新、削除、チェックアウトセッションの完了）に応じて適切なアクションを実行します。
+
+- relevantEvents: 処理対象の Stripe イベントタイプを定義した Set。
+- イベントタイプに応じて以下のアクションを実行します。
+  - customer.subscription.updated / customer.subscription.deleted: manageSubscriptionStatusChange 関数を呼び出し、サブスクリプションのステータス変更を処理します。
+  - checkout.session.completed: updateStripeCustomer 関数を呼び出し、顧客情報を更新し、manageSubscriptionStatusChange 関数を呼び出してサブスクリプションのステータス変更を処理します。
+- エラー発生時はエラーメッセージを返します。
+- 正常終了時は "received: true" を含む JSON レスポンスを返します。
+```
+
+- `components/utilities/providers.tsx`
+```plaintext
+このコードは、アプリケーション全体で利用されるコンテキストプロバイダーをまとめて管理するコンポーネント Providers を定義しています。具体的には、テーマの切り替えとツールチップの表示に関するプロバイダーを提供しています。
+
+- Providers: 複数のプロバイダーをまとめて管理するコンポーネント。
+- NextThemesProvider: next-themes ライブラリを利用して、ダークモードとライトモードの切り替え機能を提供します。
+- TooltipProvider: Tooltip コンポーネントを利用するためのコンテキストを提供します。
+- children: Providers コンポーネントでラップされた子コンポーネントは、これらのプロバイダーが提供する機能を利用できます。
 ```
 
 - `db/migrations/0000_brave_sengi.sql`
@@ -93,6 +153,16 @@ AICodeBase/
 - `db/db.ts`
 ```plaintext
 このコードは、Drizzle ORM を使用して PostgreSQL データベースに接続するための設定を行っています。環境変数からデータベースの URL を読み込み、データベースクライアントを初期化し、スキーマを定義して Drizzle ORM のインスタンスを作成しています。
+```
+
+- `lib/stripe.ts`
+```plaintext
+このコードは、Stripe API を利用するための Stripe クライアントを初期化しています。Stripe のシークレットキーと API バージョン、アプリケーション情報を設定しています。
+
+- stripe: Stripe クラスのインスタンス。Stripe API とのやり取りに利用されます。
+- process.env.STRIPE_SECRET_KEY!: 環境変数から Stripe のシークレットキーを取得しています。! は値が必ず存在することをコンパイラに保証しています。
+- apiVersion: 利用する Stripe API のバージョンを指定しています。
+- appInfo: アプリケーションの名前とバージョンを指定しています。
 ```
 
 - `types/action-types.ts`
