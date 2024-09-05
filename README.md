@@ -12,34 +12,128 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## プロジェクトのセットアップ
 
-First, run the development server:
+このガイドでは、AICodeBaseプロジェクトのセットアップ方法を説明します。以下の手順に従って、プロジェクトをローカル環境で実行できるようにします。
 
+### 1. リポジトリのクローン
+
+まず、GitHubからリポジトリをクローンします。
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/AICodeBase.git
+cd AICodeBase
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. 環境変数の設定
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+プロジェクトのルートディレクトリに`.env.local`ファイルを作成し、以下の環境変数を設定します。
+```bash
+DATABASE_URL=your_database_url
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+NEXT_PUBLIC_STRIPE_PORTAL_LINK=your_stripe_portal_link
+NEXT_PUBLIC_STRIPE_PAYMENT_LINK_YEARLY=your_stripe_payment_link_yearly
+NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY=your_stripe_payment_link_monthly
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 3. 必要なライブラリのインストール
 
-## Learn More
+以下のコマンドを実行して、必要なライブラリをインストールします。
+```bash
+npm install
+npm i drizzle-orm dotenv postgres
+npm i -D drizzle-kit
+npm install @supabase/supabase-js @supabase/auth-helpers-nextjs
+npm i stripe
+npm i framer-motion
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. データベースのセットアップ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+データベースのテーブルを生成し、マイグレーションを実行します。
+```bash
+npm run db:generate
+npm run db:migrate
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 5. 開発サーバーの起動
+
+以下のコマンドを実行して、開発サーバーを起動します。
+```bash
+npm run dev
+```
+
+ブラウザで[http://localhost:3000](http://localhost:3000)を開き、アプリケーションが正しく動作することを確認します。
+
+## ディレクトリ構造
+
+プロジェクトのディレクトリ構造は以下の通りです。
+
+```Directory Structure
+AICodeBase/
+├── actions
+│   ├── favicon.ico
+│   └── stripe-actions.ts
+├── app
+│   ├── (auth)
+│   │   ├── layout.tsx
+│   │   ├── login
+│   │   │   └── page.tsx
+│   │   └── signup
+│   │       └── page.tsx
+│   ├── api
+│   │   └── stripe
+│   │       └── webhooks
+│   │           └── route.ts
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── backend
+├── db
+│   ├── db.ts
+│   ├── migrations
+│   │   └── 0000_brave_sengi.sql
+│   ├── queries
+│   │   └── example-queries.ts
+│   └── schema
+│       ├── example-schema.ts
+│       └── index.ts
+├── .env.local
+├── .gitignore
+├── components
+│   ├── utilities
+│   │   └── providers.tsx
+│   └── header.tsx
+├── drizzle.config.ts
+├── lib
+│   └── stripe.ts
+├── next.config.mjs
+├── next-env.d.ts
+├── node_modules
+├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── prompts
+│   ├── setup-backend.md
+│   ├── setup-frontend.md
+│   ├── setup-payments.md
+│   ├── setup-project.md
+│   └── setup-supabase-auth.md
+├── public
+│   ├── next.svg
+│   └── vercel.svg
+├── README.md
+├── tailwind.config.ts
+├── tsconfig.json
+├── types
+│   ├── action-types.ts
+│   └── index.ts
+└── utils
+    └── supabaseClient.ts
+```
 
 ## Deploy on Vercel
 

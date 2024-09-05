@@ -1,5 +1,5 @@
 ### プロジェクト概要
-このプロジェクトは、Next.js、Drizzle、Tailwind CSS、およびSupabaseを使用する新しいWebアプリケーションのための出発点として機能することを目的としています。これは、CRUD（作成、読み取り、更新、削除）操作を実行するためのサンプルコードと構成を提供するボイラープレートプロジェクトです。
+このプロジェクトは、Next.js、Supabase、Stripe、Drizzle、Tailwind CSSを使用する新しいWebアプリケーションのための出発点として機能することを目的としています。これは、ユーザー認証、決済処理、サブスクリプション管理、CRUD（作成、読み取り、更新、削除）操作を実行するためのサンプルコードと構成を提供するボイラープレートプロジェクトです。
 
 ### プロジェクトの構成
 ```Directory Structure
@@ -8,6 +8,12 @@ AICodeBase/
 │   ├── favicon.ico
 │   └── stripe-actions.ts
 ├── app
+│   ├── (auth)
+│   │   ├── layout.tsx
+│   │   ├── login
+│   │   │   └── page.tsx
+│   │   └── signup
+│   │       └── page.tsx
 │   ├── api
 │   │   └── stripe
 │   │       └── webhooks
@@ -29,8 +35,9 @@ AICodeBase/
 ├── .env.local
 ├── .gitignore
 ├── components
-│   └── utilities
-│       └── providers.tsx
+│   ├── utilities
+│   │   └── providers.tsx
+│   └── header.tsx
 ├── drizzle.config.ts
 ├── lib
 │   └── stripe.ts
@@ -52,9 +59,11 @@ AICodeBase/
 ├── README.md
 ├── tailwind.config.ts
 ├── tsconfig.json
-└── types
-    ├── action-types.ts
-    └── index.ts
+├── types
+│   ├── action-types.ts
+│   └── index.ts
+└── utils
+    └── supabaseClient.ts
 ```
 
 - `actions/example-actions.ts`
@@ -77,17 +86,39 @@ AICodeBase/
   - productId: Stripeの製品ID。
 ```
 
-- `app/page.tsx`　★supabaseを入れたので更新する
+- `app/(auth)/layout.tsx`
 ```plaintext
-このコードは、Next.jsアプリケーションのホーム画面のコンポーネントを定義しています。このコンポーネントは、ユーザーがデータベース内の"example"エンティティを作成、読み取り、更新、削除するためのインターフェースを提供します。ユーザーはフォームを使用して新しいエンティティを作成し、IDで既存のエンティティを取得し、既存のエンティティを更新し、IDでエンティティを削除することができます。各アクションの結果は、ページに表示されます。
+このコードは、認証関連のページ（ログイン、サインアップなど）で使用するレイアウトコンポーネント AuthLayout を定義しています。コンテンツを常に画面の中央に表示しています。
 ```
 
-- `app/layout.tsx`　★supabaseを入れたので更新する
+- `app/(auth)/login/page.tsx`
 ```plaintext
-このコードは、Next.js アプリケーションのルートレイアウトを定義しています。アプリケーション全体の共通レイアウト、フォント、スタイル、コンテキストプロバイダーなどを設定します。
+このコードは、Supabaseを用いたログインページを実装しています。Googleによるログインをサポートしています。ユーザーがGoogleアカウントでログインすると、Supabaseが認証を処理し、ユーザーセッションが作成されます。
+```
+
+- `app/(auth)/signup/page.tsx`
+```plaintext
+このコードは、Supabaseを用いたサインアップページを実装しています。Googleによるサインアップをサポートしています。ユーザーがGoogleアカウントでサインアップすると、Supabaseが認証を処理し、新しいユーザーアカウントとユーザーセッションが作成されます。
+```
+
+- `app/(auth)/signup/page.tsx`
+```plaintext
+このコードは、Supabaseを用いたサインアップページを実装しています。ユーザーはメールアドレスとパスワードを使用して新しいアカウントを作成することができます。
+```
+
+- `app/page.tsx`
+```plaintext
+このコードは、Next.jsアプリケーションのホーム画面のコンポーネントを定義しています。このコンポーネントは、ユーザーが認証されている場合、ユーザーがデータベース内の"example"エンティティを作成、読み取り、更新、削除するためのインターフェースを提供します。ユーザーはフォームを使用して新しいエンティティを作成し、IDで既存のエンティティを取得し、既存のエンティティを更新し、IDでエンティティを削除することができます。各アクションの結果は、ページに表示されます。認証されていない場合は、ログインページにリダイレクトします。
+```
+
+- `app/layout.tsx`
+```plaintext
+このコードは、Next.js アプリケーションのルートレイアウトを定義しています。アプリケーション全体の共通レイアウト、フォント、スタイル、コンテキストプロバイダーなどを設定し、Supabaseのセッション情報をアプリケーション全体で利用できるようにしています。
 
 - metadata: アプリケーションのメタデータを定義 (タイトル、説明など)
 - RootLayout: アプリケーションのルートレイアウトコンポーネント。
+- SessionContextProvider: Supabaseのセッション情報をアプリケーション全体で利用できるようにするコンテキストプロバイダー。
+- supabaseClient: Supabaseクライアントインスタンス。
 - Providers: Shadcn/ui のテーマやコンテキストを提供するコンポーネントをラップしています。
 - Toaster: Shadcn/ui のトースト通知を表示するためのコンポーネント。
 - children: 各ページのコンテンツがここにレンダリングされます。
@@ -105,6 +136,11 @@ AICodeBase/
   - checkout.session.completed: updateStripeCustomer 関数を呼び出し、顧客情報を更新し、manageSubscriptionStatusChange 関数を呼び出してサブスクリプションのステータス変更を処理します。
 - エラー発生時はエラーメッセージを返します。
 - 正常終了時は "received: true" を含む JSON レスポンスを返します。
+```
+
+- `components/header.tsx`
+```plaintext
+このコードは、アプリケーションのヘッダーコンポーネントを定義しています。ヘッダーには、ユーザーの認証状態に応じてログイン/サインアップボタンまたはログアウトボタンとユーザーのメールアドレスが表示されます。
 ```
 
 - `components/utilities/providers.tsx`
@@ -184,3 +220,18 @@ AICodeBase/
 ```plaintext
 このコードは、Drizzle ORMを使ったデータベースマイグレーションの設定ファイルです。 .env.local ファイルから環境変数を読み込み、PostgreSQL データベースへの接続情報とスキーマ定義ファイルの場所、マイグレーションファイルの出力先を指定しています。
 ```
+
+- `utils/supabaseClient.ts`
+```plaintext
+このコードは、Supabaseクライアントを初期化し、エクスポートしています。
+
+- supabaseUrl: SupabaseプロジェクトのURL。環境変数NEXT_PUBLIC_SUPABASE_URLから取得されます。
+- supabaseAnonKey: Supabaseプロジェクトの匿名キー。環境変数NEXT_PUBLIC_SUPABASE_ANON_KEYから取得されます。
+- supabase: createClient関数を使用して初期化されたSupabaseクライアント。データベースへのクエリや認証などの操作に使用できます。
+```
+
+
+
+
+
+
