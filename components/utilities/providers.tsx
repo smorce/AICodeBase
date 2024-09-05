@@ -11,3 +11,4 @@ export const Providers = ({ children, ...props }: ThemeProviderProps) => {
     </NextThemesProvider>
   );
 };
+// WARNING: この行は古いコードなので削除が必要

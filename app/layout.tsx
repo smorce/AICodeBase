@@ -31,3 +31,4 @@ export default function RootLayout({
     </html>
   );
 }
+// WARNING: この行は古いコードなので削除が必要
