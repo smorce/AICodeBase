@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/utilities/providers";
 import { Toaster } from "@/components/ui/toaster";
+import { SessionContextProvider } from "@supabase/auth-helpers-nextjs";
+import { supabase } from "../utils/supabaseClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,18 +19,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers
-          attribute="class"
-          defaultTheme="dark"
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster />
-        </Providers>
-      </body>
-    </html>
+    <SessionContextProvider supabaseClient={supabase}>
+      <html lang="en">
+        <body className={inter.className}>
+          <Providers
+            attribute="class"
+            defaultTheme="dark"
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </Providers>
+        </body>
+      </html>
+    </SessionContextProvider>
   );
 }
 // WARNING: この行は古いコードなので削除が必要

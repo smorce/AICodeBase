@@ -6,12 +6,24 @@ import {
   deleteExampleAction,
   getAllExamplesAction,
   getExampleByIdAction,
-  updateExampleAction
+  updateExampleAction,
 } from "@/actions/example-actions";
 import { InsertExample } from "@/db/schema/example-schema";
 import { ActionState } from "@/types";
+import { useAuth } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const { session } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!session) {
+      router.push("/login");
+    }
+  }, [session, router]);
+
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState("");
@@ -23,7 +35,7 @@ export default function Home() {
     const formData: InsertExample = {
       name,
       age,
-      email
+      email,
     };
     const result = await createExampleAction(formData);
     setActionResult(result);
@@ -43,7 +55,7 @@ export default function Home() {
     const formData: Partial<InsertExample> = {
       name,
       age,
-      email
+      email,
     };
     const result = await updateExampleAction(id, formData);
     setActionResult(result);
@@ -54,22 +66,46 @@ export default function Home() {
     setActionResult(result);
   };
 
+  if (!session) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+      
   return (
     <div>
       <h1>Example Actions</h1>
+      <p>Welcome, {session.user.email}!</p> {/* ユーザーのメールアドレスを表示 */}
       <form onSubmit={handleSubmit}>
         <h2>Create Example</h2>
         <div>
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
         <div>
           <label htmlFor="age">Age:</label>
-          <input type="number" id="age" value={age} onChange={(e) => setAge(parseInt(e.target.value))} />
+          <input
+            type="number"
+            id="age"
+            value={age}
+            onChange={(e) => setAge(parseInt(e.target.value))}
+          />
         </div>
         <div>
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <button type="submit">Create</button>
       </form>
@@ -115,7 +151,9 @@ export default function Home() {
         <div>
           <p>Status: {actionResult.status}</p>
           <p>Message: {actionResult.message}</p>
-          {actionResult.data && <pre>{JSON.stringify(actionResult.data, null, 2)}</pre>}
+          {actionResult.data && (
+            <pre>{JSON.stringify(actionResult.data, null, 2)}</pre>
+          )}
         </div>
       )}
     </div>
