@@ -1,6 +1,6 @@
 - .cursorrules よりも Rules for AI の方が優先されてしまったため、削除した
-- Rules for AI は YAML 形式で記載。コードを省略しないような制約条件も追加した
-- プロンプトは以下で実行する。Gemini 1.5 Pro か GPT-4o しかうまくいかない。Claude 3.5 は page.tsx だけ漏れたり、全くダメだったりする。
+- Rules for AI は YAML 形式で記載。コードを省略しないような制約条件も追加した。かなり強い影響を受けるので少し変えただけで結果が大きく変わる。今の設定でFIXする
+- プロンプトは以下で実行する。Gemini 1.5 Pro か GPT-4o しかうまくいかない。Claude 3.5 は page.tsx だけ漏れたり、全くダメだったりして、ガチャ要素がある。XMLプロンプトじゃないせいかも。
 ```plaintext
 @Codebase @setup-backend.md を実行してください。
 ```
