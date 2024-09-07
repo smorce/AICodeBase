@@ -7,6 +7,8 @@ Please present the complete code, not abbreviated as in the existing code.
 
 ## Command Instructions
 
+### Command 1
+
 Please interpret and execute the following code instructions.
 ```code
 setup_files = [
@@ -14,11 +16,37 @@ setup_files = [
     "prompts/setup-frontend.md",
     "prompts/setup-payments.md",
     "prompts/setup-supabase-auth.md",
-    "prompts/setup-completed.md"
+]
+
+for file in setup_files:
+    load_file(file)
+```
+
+### Command 2
+
+Please interpret and execute the following code instructions.
+```code
+setup_files = [
+    "prompts/setup-backend.md",
+    "prompts/setup-frontend.md",
+    "prompts/setup-payments.md",
+    "prompts/setup-supabase-auth.md",
 ]
 
 for file in setup_files:
     execute_setup(file)
+```
+
+### Command 3
+
+Please interpret and execute the following code instructions.
+```code
+setup_files = [
+    "prompts/setup-completed.md",
+]
+
+for file in setup_files:
+    last_selfCheck_execute(file)
 ```
 
 ## Finish
