@@ -13,6 +13,7 @@ Run these files in order:
 - `setup-frontend.md` を実行してください。
 - `setup-payments.md` を実行してください。
 - `setup-supabase-auth.md` を実行してください。
+- `setup-completed.md` を実行してください。
 
 ## Finish
 
