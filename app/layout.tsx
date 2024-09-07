@@ -35,4 +35,3 @@ export default function RootLayout({
     </SessionContextProvider>
   );
 }
-// WARNING: この行は古いコードなので削除が必要

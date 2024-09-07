@@ -11,4 +11,3 @@ export default defineConfig({
     url: process.env.DATABASE_URL!
   }
 });
-// WARNING: この行は古いコードなので削除が必要

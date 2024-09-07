@@ -88,4 +88,3 @@ export async function POST(req: Request) {
     }
     return new Response(JSON.stringify({ received: true }))
 }
-// WARNING: この行は古いコードなので削除が必要

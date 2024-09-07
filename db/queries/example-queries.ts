@@ -52,4 +52,3 @@ export const deleteExample = async (id: string) => {
     throw new Error("Failed to delete example");
   }
 };
-// WARNING: この行は古いコードなので削除が必要

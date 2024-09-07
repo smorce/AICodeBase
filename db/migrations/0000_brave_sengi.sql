@@ -6,4 +6,3 @@ CREATE TABLE "example" (
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL DEFAULT now()
 );
-// WARNING: この行は古いコードなので削除が必要

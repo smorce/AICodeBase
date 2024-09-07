@@ -5,4 +5,3 @@ interface AuthLayoutProps {
 export default async function AuthLayout({ children }: AuthLayoutProps) {
   return <div className="flex h-screen items-center justify-center">{children}</div>;
 }
-// WARNING: この行は古いコードなので削除が必要

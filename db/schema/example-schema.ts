@@ -14,4 +14,3 @@ export const exampleTable = pgTable("example", {
 
 export type InsertExample = typeof exampleTable.$inferInsert;
 export type SelectExample = typeof exampleTable.$inferSelect;
-// WARNING: この行は古いコードなので削除が必要

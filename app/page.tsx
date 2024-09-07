@@ -77,7 +77,7 @@ export default function Home() {
   return (
     <div>
       <h1>Example Actions</h1>
-      <p>Welcome, {session.user.email}!</p> {/* ユーザーのメールアドレスを表示 */}
+      <p>Welcome, {session.user.email}!</p>
       <form onSubmit={handleSubmit}>
         <h2>Create Example</h2>
         <div>
@@ -159,4 +159,3 @@ export default function Home() {
     </div>
   );
 }
-// WARNING: この行は古いコードなので削除が必要

@@ -7,4 +7,3 @@ export default function LoginPage() {
 
   return <Auth supabaseClient={supabase} providers={["google"]} />;
 }
-// WARNING: この行は古いコードなので削除が必要

@@ -52,4 +52,3 @@ export async function deleteExampleAction(id: string): Promise<ActionState> {
     return { status: "error", message: "Failed to delete example" };
   }
 }
-// WARNING: この行は古いコードなので削除が必要

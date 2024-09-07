@@ -64,4 +64,3 @@ export const manageSubscriptionStatusChange = async (
     membership: membershipStatus
   })
 };
-// WARNING: この行は古いコードなので削除が必要

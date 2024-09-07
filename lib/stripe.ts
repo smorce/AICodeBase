@@ -7,4 +7,3 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     version: "0.1.0"
   }
 });
-// WARNING: この行は古いコードなので削除が必要

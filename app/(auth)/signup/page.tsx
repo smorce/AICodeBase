@@ -7,4 +7,3 @@ export default function SignUpPage() {
 
   return <Auth supabaseClient={supabase} providers={["google"]} />;
 }
-// WARNING: この行は古いコードなので削除が必要
