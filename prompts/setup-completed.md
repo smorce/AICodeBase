@@ -31,15 +31,15 @@ file_paths = [
     'types/index.ts',
     'utils/supabaseClient.ts',
 ]
-for path in file_paths:
-    with open(path) as f:
-        content = f.read()
-    # Step1 content にユーザーの要求が反映されているか確認する
-    # Step2
-    if (content にユーザーの要求が反映されている):
+for file in file_paths:
+    # Step1
+    force_add_to_edit_space(file)
+    # Step2 file にユーザーの要求が反映されているか確認する
+    # Step3
+    if (file にユーザーの要求が反映されている):
         pass
     else:
-        (ユーザーの要求に沿って content を更新する)
+        (ユーザーの要求に沿って file を更新する)
 ```
 
 ## Finish
