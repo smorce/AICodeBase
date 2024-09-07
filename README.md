@@ -30,6 +30,14 @@ Cursor Composer を使ってボイラーテンプレートを更新します。
 - ボイラーテンプレートとは、プロジェクトのテンプレートを指します。
 - Gemini と Claude で使用しているプロンプトは異なります。LLM に合わせて以下のプロンプトを入力してください。
 
+**GPT-4o 実行の様子**
+
+[https://youtu.be/9fjuSgshQcE](https://youtu.be/9fjuSgshQcE)
+
+```plaintext
+@Codebase @setup-project.md を実行してください。
+```
+
 **Gemini 1.5 Pro exp 0827 実行の様子**
 
 [https://youtu.be/CzscaU8zIG8](https://youtu.be/CzscaU8zIG8)
