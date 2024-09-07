@@ -22,4 +22,3 @@ export default function Header() {
     </header>
   );
 }
-// WARNING: この行は古いコードなので削除が必要
