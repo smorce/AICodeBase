@@ -24,7 +24,37 @@ git clone https://github.com/your-username/AICodeBase.git
 cd AICodeBase
 ```
 
-### 2. 環境変数の設定
+### 2. Cursor Composer を使用してボイラーテンプレートをアップデート
+Cursor Composer を使ってボイラーテンプレートを更新します。
+
+- ボイラーテンプレートとは、プロジェクトのテンプレートを指します。
+- Gemini と Claude で使用しているプロンプトは異なります。LLM に合わせて以下のプロンプトを入力してください。
+
+**Gemini 1.5 Pro exp 0827 実行の様子**
+
+[https://youtu.be/CzscaU8zIG8](https://youtu.be/CzscaU8zIG8)
+
+```plaintext
+@Codebase @setup-project.md を読み込んでください。
+```
+
+**Claude 3.5 Sonnet 実行の様子**
+
+[https://youtu.be/Cb_8I8knQHw](https://youtu.be/Cb_8I8knQHw)
+
+```plaintext
+@Codebase @setup-project.md あなたが実行してください。
+```
+
+- 上記のプロンプトを入力するとボイラーテンプレートに埋め込まれた不要なコメント(//WARNING)が削除されてコードがアップデートされます。コメントが削除されるだけで他に変更はありません
+- 上記のプロンプトを入力するときにプロジェクト固有の要求仕様を同時に入力すると、LLM は要求を汲み取ってコードをアップデートしてくれます。要求を反映したコードが完成した後は、不要なコメント(//WARNING)がきちんと削除されているか最後に確認してください。
+
+**Cursor の仕様**
+
+- Free プランでは Composer 機能は利用できません。
+- Pro プランにアップグレードすると、Composer を含む追加機能が利用可能になります。
+
+### 3. 環境変数の設定
 
 プロジェクトのルートディレクトリに`.env.local`ファイルを作成し、以下の環境変数を設定します。
 ```bash
@@ -38,7 +68,7 @@ NEXT_PUBLIC_STRIPE_PAYMENT_LINK_YEARLY=your_stripe_payment_link_yearly
 NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY=your_stripe_payment_link_monthly
 ```
 
-### 3. 必要なライブラリのインストール
+### 4. 必要なライブラリのインストール
 
 以下のコマンドを実行して、必要なライブラリをインストールします。
 ```bash
@@ -50,7 +80,7 @@ npm i stripe
 npm i framer-motion
 ```
 
-### 4. データベースのセットアップ
+### 5. データベースのセットアップ
 
 データベースのテーブルを生成し、マイグレーションを実行します。
 ```bash
@@ -58,7 +88,7 @@ npm run db:generate
 npm run db:migrate
 ```
 
-### 5. 開発サーバーの起動
+### 6. 開発サーバーの起動
 
 以下のコマンドを実行して、開発サーバーを起動します。
 ```bash
