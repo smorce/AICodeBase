@@ -8,7 +8,7 @@ Please present the complete code, not abbreviated as in the existing code.
 
 ## Command Instructions
 
-Please run the following code.
+Please interpret and execute the following code instructions.
 ```code
 file_paths = [
     'actions/example-actions.ts',
@@ -34,6 +34,12 @@ file_paths = [
 for path in file_paths:
     with open(path) as f:
         content = f.read()
+    # Step1 content にユーザーの要求が反映されているか確認する
+    # Step2
+    if (content にユーザーの要求が反映されている):
+        pass
+    else:
+        (ユーザーの要求に沿って content を更新する)
 ```
 
 ## Finish

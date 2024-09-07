@@ -7,47 +7,13 @@ Please present the complete code, not abbreviated as in the existing code.
 
 ## Command Instructions
 
-### Command 1
+Run these files in order:
 
-Please interpret and execute the following code instructions.
-```code
-setup_files = [
-    "prompts/setup-backend.md",
-    "prompts/setup-frontend.md",
-    "prompts/setup-payments.md",
-    "prompts/setup-supabase-auth.md",
-]
-
-for file in setup_files:
-    Force_md_file_to_be_added_to_edit_space(file)
-```
-
-### Command 2
-
-Please interpret and execute the following code instructions.
-```code
-setup_files = [
-    "prompts/setup-backend.md",
-    "prompts/setup-frontend.md",
-    "prompts/setup-payments.md",
-    "prompts/setup-supabase-auth.md",
-]
-
-for file in setup_files:
-    execute_setup(file)
-```
-
-### Command 3
-
-Please interpret and execute the following code instructions.
-```code
-setup_files = [
-    "prompts/setup-completed.md",
-]
-
-for file in setup_files:
-    last_selfCheck_execute(file)
-```
+- Run the setup-backend.md file
+- Run the setup-frontend.md file
+- Run the setup-payments.md file
+- Run the setup-supabase-auth.md file
+- Run the setup-completed.md file  // for self-check
 
 ## Finish
 
