@@ -7,13 +7,19 @@ Please present the complete code, not abbreviated as in the existing code.
 
 ## Command Instructions
 
-Run these files in order:
+Please run the following code.
+```code
+setup_files = [
+    "prompts/setup-backend.md",
+    "prompts/setup-frontend.md",
+    "prompts/setup-payments.md",
+    "prompts/setup-supabase-auth.md",
+    "prompts/setup-completed.md"
+]
 
-- `setup-backend.md` を実行してください。
-- `setup-frontend.md` を実行してください。
-- `setup-payments.md` を実行してください。
-- `setup-supabase-auth.md` を実行してください。
-- `setup-completed.md` を実行してください。
+for file in setup_files:
+    execute_setup(file)
+```
 
 ## Finish
 
