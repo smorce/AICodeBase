@@ -19,7 +19,7 @@ setup_files = [
 ]
 
 for file in setup_files:
-    add_to_track(file)
+    add(file)
 ```
 
 ### Command 2
