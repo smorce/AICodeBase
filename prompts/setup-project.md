@@ -7,7 +7,7 @@ Please present the complete code, not abbreviated as in the existing code.
 
 ## Command Instructions
 
-Please execute the following code conceptually.
+Please interpret and execute the following code instructions.
 ```code
 setup_files = [
     "prompts/setup-backend.md",
