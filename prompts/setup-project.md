@@ -19,7 +19,7 @@ setup_files = [
 ]
 
 for file in setup_files:
-    editing_file(file)
+    Force_md_file_to_be_added_to_edit_space(file)
 ```
 
 ### Command 2
