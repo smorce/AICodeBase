@@ -19,7 +19,7 @@ setup_files = [
 ]
 
 for file in setup_files:
-    edited_file(file)
+    editing_file(file)
 ```
 
 ### Command 2
