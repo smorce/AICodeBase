@@ -19,7 +19,7 @@ setup_files = [
 ]
 
 for file in setup_files:
-    add_as_CursorComposer_edit_file_target(file)
+    edited_file(file)
 ```
 
 ### Command 2
