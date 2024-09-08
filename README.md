@@ -229,6 +229,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
    - **STRIPE_SECRET_KEY**: 「シークレットキー」として表示されます。「ライブキーを表示」ボタンをクリックして確認できます。
 
    - **NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY**: 「公開可能キー」として表示されます。
+     - AICodeBase では、このキーは使用しません。
 
 ### Webhook Secretの取得
 
