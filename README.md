@@ -90,11 +90,6 @@ NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY=your_stripe_payment_link_monthly
 以下のコマンドを実行して、必要なライブラリをインストールします。
 ```bash
 npm install
-npm i drizzle-orm dotenv postgres
-npm i -D drizzle-kit
-npm install @supabase/supabase-js @supabase/auth-helpers-nextjs
-npm i stripe
-npm i framer-motion
 ```
 
 ### 5. データベースのセットアップ
