@@ -3,8 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/utilities/providers";
 import { Toaster } from "@/components/ui/toaster";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import ClientWrapper from "./ClientWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +17,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createClientComponentClient();
-
   return (
-    <SessionContextProvider supabaseClient={supabase}>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <ClientWrapper>
           <Providers
             attribute="class"
             defaultTheme="dark"
@@ -32,8 +29,8 @@ export default function RootLayout({
             {children}
             <Toaster />
           </Providers>
-        </body>
-      </html>
-    </SessionContextProvider>
+        </ClientWrapper>
+      </body>
+    </html>
   );
 }
