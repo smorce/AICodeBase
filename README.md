@@ -109,7 +109,12 @@ Connection string の URI に記載された [YOUR-PASSWORD] を percent_encoded
 以下のコマンドを実行して、必要なライブラリをインストールします。
 ```bash
 npm install
+npm install shadcn-ui
+npx shadcn-ui@latest init
+npx shadcn-ui@latest add tooltip
 ```
+
+- npx shadcn-ui@latest init は shadcn-ui のコンポーネントを初期化します。全てエンターをします。
 
 ### 5. データベースのセットアップ
 
