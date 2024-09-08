@@ -1,8 +1,8 @@
-import { stripe } from "@/lib/stripe"; // stripe のパスを確認
+import { stripe } from "@/lib/stripe";
 import {
   manageSubscriptionStatusChange,
   updateStripeCustomer
-} from "@/actions/stripe-actions"; // stripe-db から stripe-actions に変更
+} from "@/actions/stripe-actions";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 
