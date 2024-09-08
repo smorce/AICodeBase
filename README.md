@@ -85,6 +85,24 @@ NEXT_PUBLIC_STRIPE_PAYMENT_LINK_YEARLY=your_stripe_payment_link_yearly
 NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY=your_stripe_payment_link_monthly
 ```
 
+your_database_uri はパスワードを %エンコーディング したものをお勧めします。<br>
+まず、Supabase の Database Settings の Connection string の URI をコピーします。<br>
+次に、以下のコードを実行して DATABASE_PASS を %エンコーディング します。<br>
+
+```python
+import urllib.parse
+
+DATABASE_PASS = "Supabase の New Project 作成時に設定したあなたの Password"
+
+percent_encoded_password = urllib.parse.quote(DATABASE_PASS, safe=':/')
+
+print(percent_encoded_password)
+```
+percent_encoded_password が %エンコーディング されたパスワードになります。<br>
+<br>
+Connection string の URI に記載された [YOUR-PASSWORD] を percent_encoded_password に置換してください。<br>
+置換したものを DATABASE_URL に設定してください。
+
 ### 4. 必要なライブラリのインストール
 
 以下のコマンドを実行して、必要なライブラリをインストールします。
@@ -110,6 +128,7 @@ npm run db:migrate
 - Drizzle Kit では、migrate コマンドではなく push コマンドを使用します。データベーススキーマを直接更新するためのコマンドです。
 - ユーザー確認を Skip するために Linux コマンドとして yes を使用しています。
 - generate, push する際は :pg をつけ、使用するデータベースタイプを指定する必要があります
+- drizzle.config.ts は「dialect: "postgresql"」ではなく「driver: "pg"」を指定
 
 ### 6. 開発サーバーの起動
 
@@ -148,7 +167,7 @@ AICodeBase/
 ├── db
 │   ├── db.ts
 │   ├── migrations
-│   │   └── 0000_brave_sengi.sql
+│   │   └── 0000_XXXXX.sql
 │   ├── queries
 │   │   └── example-queries.ts
 │   └── schema

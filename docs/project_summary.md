@@ -26,7 +26,7 @@ AICodeBase/
 ├── db
 │   ├── db.ts
 │   ├── migrations
-│   │   └── 0000_brave_sengi.sql
+│   │   └── 0000_XXXXX.sql
 │   ├── queries
 │   │   └── example-queries.ts
 │   └── schema
@@ -153,7 +153,7 @@ AICodeBase/
 - children: Providers コンポーネントでラップされた子コンポーネントは、これらのプロバイダーが提供する機能を利用できます。
 ```
 
-- `db/migrations/0000_brave_sengi.sql`
+- `db/migrations/0000_XXXXX.sql`
 ```plaintext
 このコードは、SQLを使用して "example" という名前のテーブルを作成するデータベースマイグレーションスクリプトです。このテーブルは、ユーザーなどのエンティティの基本的な情報を格納するように設計されています。
 

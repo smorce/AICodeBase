@@ -21,7 +21,7 @@ file_paths = [
     'app/api/stripe/webhooks/route.ts',
     'components/header.tsx',
     'components/utilities/providers.tsx',
-    'db/migrations/0000_brave_sengi.sql',
+    'db/migrations/0000_XXXXX.sql',
     'db/queries/example-queries.ts',
     'db/schema/example-schema.ts',
     'db/schema/index.ts',

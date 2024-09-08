@@ -47,7 +47,7 @@ AICodeBase/
 ├── db
 │   ├── db.ts
 │   ├── migrations
-│   │   └── 0000_brave_sengi.sql
+│   │   └── 0000_XXXXX.sql
 │   ├── queries
 │   │   └── example-queries.ts
 │   └── schema
@@ -82,7 +82,7 @@ AICodeBase/
 - My Codes
   1. `drizzle.config.ts`
   2. `actions/example-actions.ts` 
-  3. `db/migrations/0000_brave_sengi.sql`
+  3. `db/migrations/0000_XXXXX.sql`
   4. `db/queries/example-queries.ts`
   5. `db/schema/example-schema.ts`
   6. `db/schema/index.ts`

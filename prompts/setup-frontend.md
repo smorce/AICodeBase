@@ -49,7 +49,7 @@ AICodeBase/
 ├── db
 │   ├── db.ts
 │   ├── migrations
-│   │   └── 0000_brave_sengi.sql
+│   │   └── 0000_XXXXX.sql
 │   ├── queries
 │   │   └── example-queries.ts
 │   └── schema
