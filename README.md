@@ -112,6 +112,7 @@ npm install
 npm install shadcn-ui
 npx shadcn-ui@latest init
 npx shadcn-ui@latest add tooltip
+npx shadcn-ui@latest add toast
 ```
 
 - npx shadcn-ui@latest init は shadcn-ui のコンポーネントを初期化します。全てエンターをします。
