@@ -297,7 +297,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 **テスト中はサンドボックス環境で作業することをお勧めします。**
 
 ## to do
-- GCPコンソール画面でプロバイダ登録をしていないためサインアップもサインインもできないので、ユーザーのE-mailとパスワードで登録できるように修正する
+- GCPコンソール画面でプロバイダ登録をしていないためサインアップもサインインもできないので、ユーザーのE-mailとパスワードで登録できる仕組みも追加する
 - 以下をproject_summary.md と setup-completed.md に追記か更新する
   - ClientWrapper.tsx（追記）
   - app/layout.tsx（更新）
