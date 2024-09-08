@@ -75,7 +75,7 @@ Cursor Composer を使ってボイラーテンプレートを更新します。
 
 プロジェクトのルートディレクトリに`.env.local`ファイルを作成し、以下の環境変数を設定します。
 ```bash
-DATABASE_URL=your_database_url
+DATABASE_URL=your_database_uri
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 STRIPE_SECRET_KEY=your_stripe_secret_key
@@ -188,6 +188,33 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+## Supabaseの無料アカウントでキーを取得する
+
+### Supabaseキーの取得
+
+1. Supabaseのウェブサイト（https://supabase.com/）にアクセスし、無料アカウントを作成します。
+
+2. アカウント作成後、新しいプロジェクトを作成します。
+
+3. プロジェクトが作成されたら、ダッシュボードの「Settings」（設定）セクションに移動します。
+
+4. 左側のメニューから「API」を選択します。
+
+5. このページで以下の情報が表示されます:
+
+   - **Project URL**: これが`NEXT_PUBLIC_SUPABASE_URL`の値になります。
+   
+   - **anon public**: これが`NEXT_PUBLIC_SUPABASE_ANON_KEY`の値になります。
+
+6. これらの値をコピーして、あなたのアプリケーションの環境変数として設定します。
+
+無料プランには一定の制限がありますが、開発やテスト目的には十分な機能が提供されています。無料プランの制限には以下のようなものがあります:
+
+- 最大2つのプロジェクト
+- 1プロジェクトあたり最大500MBのデータベース容量
+- 1日あたり最大50,000回のAPI呼び出し
+
+これらの制限内であれば、完全に無料でSupabaseの機能を利用することができます。
 
 ## Stripeの無料アカウントでキーを取得する
 
@@ -233,6 +260,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 これらの設定はすべてStripeの無料アカウントで行うことができます。ただし、実際の決済を処理するには、アカウントを本番モードに切り替え、必要な認証手続きを完了する必要があります。
 
 **テスト中は「テストモード」を使用し、本番環境に移行する準備ができたら「ライブモード」に切り替えることをお勧めします。** これにより、実際の取引を開始する前に、安全にインテグレーションをテストすることができます。
-
-
-
+**テスト中はサンドボックス環境で作業することをお勧めします。**
