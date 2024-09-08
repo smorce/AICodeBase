@@ -295,3 +295,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 **テスト中は「テストモード」を使用し、本番環境に移行する準備ができたら「ライブモード」に切り替えることをお勧めします。** これにより、実際の取引を開始する前に、安全にインテグレーションをテストすることができます。<br>
 **テスト中はサンドボックス環境で作業することをお勧めします。**
+
+## to do
+- GCPコンソール画面でプロバイダ登録をしていないためサインアップもサインインもできないので、ユーザーのE-mailとパスワードで登録できるように修正する
+- 以下をproject_summary.md と setup-completed.md に追記か更新する
+  - ClientWrapper.tsx（追記）
+  - app/layout.tsx（更新）
+  - app/page.tsx（更新）
