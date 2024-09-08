@@ -187,3 +187,52 @@ AICodeBase/
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Stripeの無料アカウントでキーを取得する
+
+### Stripeキーの取得
+
+1. Stripeアカウントにログインし、ダッシュボードにアクセスします。
+
+2. 左側のメニューから「開発者」を選択し、次に「APIキー」をクリックします。
+
+3. 「標準キー」セクションで以下の情報が表示されます:
+
+   - **STRIPE_SECRET_KEY**: 「シークレットキー」として表示されます。「ライブキーを表示」ボタンをクリックして確認できます。
+
+   - **NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY**: 「公開可能キー」として表示されます。
+
+### Webhook Secretの取得
+
+1. Stripeダッシュボードの「開発者」セクションで「Webhooks」を選択します。
+
+2. 新しいWebhookエンドポイントを追加するか、既存のものを選択します。
+
+   2-1. Webhook用のエンドポイントURLは、Stripeからのイベント通知を受け取るためのあなたのアプリケーションのURLです。一般的に、以下のような形式になります。<br>
+   https://あなたのドメイン.com/stripe/webhook
+
+3. Webhookの詳細ページで「署名シークレットを表示」をクリックすると、**STRIPE_WEBHOOK_SECRET**が表示されます。
+
+### カスタマーポータルリンクの設定
+
+1. Stripeダッシュボードで「設定」→「カスタマーポータル」([こちらをクリック](https://dashboard.stripe.com/test/settings/billing/portal))に移動します。
+
+2. ポータルの設定を行い、有効化します。
+
+3. 設定完了後、カスタマーポータルへのリンクが生成され、これが**NEXT_PUBLIC_STRIPE_PORTAL_LINK**となります。
+
+### 支払いリンクの作成
+
+1. Stripeダッシュボードで「支払い」→「支払いリンク」に移動します。
+
+2. 「新しい支払いリンク」をクリックし、月額と年額のプランに対応する2つの支払いリンクを作成します。
+
+3. 作成されたリンクが**NEXT_PUBLIC_STRIPE_PAYMENT_LINK_YEARLY**と**NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY**になります。
+
+これらの設定はすべてStripeの無料アカウントで行うことができます。ただし、実際の決済を処理するには、アカウントを本番モードに切り替え、必要な認証手続きを完了する必要があります。
+
+**テスト中は「テストモード」を使用し、本番環境に移行する準備ができたら「ライブモード」に切り替えることをお勧めします。** これにより、実際の取引を開始する前に、安全にインテグレーションをテストすることができます。
+
+
+
