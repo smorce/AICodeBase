@@ -87,6 +87,7 @@ NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY=your_stripe_payment_link_monthly
 
 your_database_uri はパスワードを %エンコーディング したものをお勧めします。<br>
 まず、Supabase の Database Settings の Connection string の URI をコピーします。<br>
+[参考画像](./docs/Supabase_Database_Settings.png)
 次に、以下のコードを実行して DATABASE_PASS を %エンコーディング します。<br>
 
 ```python
@@ -118,7 +119,7 @@ npm run db:generate
 npm run db:migrate
 ```
 
-実行するスクリプトは以下の通りです。
+[以下は解説] 実行するスクリプトは以下の通りです。
 ```
 "scripts": {
   "db:generate": "npx drizzle-kit generate:pg",
