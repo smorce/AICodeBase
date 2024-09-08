@@ -1,66 +1,81 @@
-import {
-  updateProfile,
-  updateProfileByCustomerId
-} from "@/db/queries/profiles-queries"; // profiles-queries のパスを確認
-import { Membership } from "@/types/membership"; // membership のパスを確認
+import { updateProfile, updateProfileByStripeCustomerId } from "@/db/queries/profiles-queries";
+import { SelectProfile } from "@/db/schema";
+import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
-import { stripe } from "@/lib/stripe"; // stripe のパスを確認
 
-const getMembershipStatus = (
-  status: Stripe.Subscription.Status,
-  membership: Membership
-): Membership => {
+type MembershipStatus = SelectProfile["membership"];
+
+const getMembershipStatus = (status: Stripe.Subscription.Status, membership: MembershipStatus): MembershipStatus => {
   switch (status) {
     case "active":
     case "trialing":
-      return membership
+      return membership;
     case "canceled":
     case "incomplete":
     case "incomplete_expired":
     case "past_due":
     case "paused":
     case "unpaid":
-      return "free"
+      return "free";
     default:
-      return "free"
+      return "free";
   }
 };
 
-export const updateStripeCustomer = async (
-  profileId: string,
-  subscriptionId: string,
-  customerId: string
-) => {
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
+const getSubscription = async (subscriptionId: string) => {
+  return stripe.subscriptions.retrieve(subscriptionId, {
     expand: ["default_payment_method"]
-  })
+  });
+};
 
-  const updatedProfile = await updateProfile(profileId, {
-    stripeCustomerId: customerId,
-    stripeSubscriptionId: subscription.id
-  })
+export const updateStripeCustomer = async (userId: string, subscriptionId: string, customerId: string) => {
+  try {
+    if (!userId || !subscriptionId || !customerId) {
+      throw new Error("Missing required parameters for updateStripeCustomer");
+    }
 
-  if (!updatedProfile) {
-    throw new Error("Failed to update customer")
+    const subscription = await getSubscription(subscriptionId);
+
+    const updatedProfile = await updateProfile(userId, {
+      stripeCustomerId: customerId,
+      stripeSubscriptionId: subscription.id
+    });
+
+    if (!updatedProfile) {
+      throw new Error("Failed to update customer profile");
+    }
+
+    return updatedProfile;
+  } catch (error) {
+    console.error("Error in updateStripeCustomer:", error);
+    throw error instanceof Error ? error : new Error("Failed to update Stripe customer");
   }
 };
 
-export const manageSubscriptionStatusChange = async (
-  subscriptionId: string,
-  customerId: string,
-  productId: string
-) => {
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
-    expand: ["default_payment_method"]
-  })
+export const manageSubscriptionStatusChange = async (subscriptionId: string, customerId: string, productId: string): Promise<MembershipStatus> => {
+  try {
+    if (!subscriptionId || !customerId || !productId) {
+      throw new Error("Missing required parameters for manageSubscriptionStatusChange");
+    }
 
-  const product = await stripe.products.retrieve(productId)
-  const membership = product.metadata.membership as Membership
+    const subscription = await getSubscription(subscriptionId);
 
-  const membershipStatus = getMembershipStatus(subscription.status, membership)
+    const product = await stripe.products.retrieve(productId);
+    const membership = product.metadata.membership as MembershipStatus;
+    if (!["free", "pro"].includes(membership)) {
+      throw new Error(`Invalid membership type in product metadata: ${membership}`);
+    }
 
-  await updateProfileByCustomerId(customerId, {
-    stripeSubscriptionId: subscription.id,
-    membership: membershipStatus
-  })
+    const membershipStatus = getMembershipStatus(subscription.status, membership);
+
+    await updateProfileByStripeCustomerId(customerId, {
+      stripeSubscriptionId: subscription.id,
+      membership: membershipStatus
+    });
+
+    return membershipStatus;
+  } catch (error) {
+    console.error("Error in manageSubscriptionStatusChange:", error);
+    throw error instanceof Error ? error : new Error("Failed to update subscription status");
+  }
 };

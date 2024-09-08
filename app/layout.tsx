@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/utilities/providers";
 import { Toaster } from "@/components/ui/toaster";
-import { SessionContextProvider } from "@supabase/auth-helpers-nextjs";
-import { supabase } from "../utils/supabaseClient";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +18,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const supabase = createClientComponentClient();
+
   return (
     <SessionContextProvider supabaseClient={supabase}>
       <html lang="en">

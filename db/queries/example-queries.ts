@@ -17,9 +17,7 @@ export const createExample = async (data: InsertExample) => {
 
 export const getExampleById = async (id: string) => {
   try {
-    const example = await db.query.exampleTable.findFirst({
-      where: eq(exampleTable.id, id)
-    });
+    const example = await db.select().from(exampleTable).where(eq(exampleTable.id, id)).limit(1); // 修正箇所
     if (!example) {
       throw new Error("Example not found");
     }
@@ -31,7 +29,7 @@ export const getExampleById = async (id: string) => {
 };
 
 export const getAllExamples = async (): Promise<SelectExample[]> => {
-  return db.query.exampleTable.findMany();
+  return db.select().from(exampleTable);
 };
 
 export const updateExample = async (id: string, data: Partial<InsertExample>) => {

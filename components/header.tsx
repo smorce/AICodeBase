@@ -1,10 +1,10 @@
 "use client";
 
-import { Auth, useAuth } from "@supabase/auth-helpers-react";
+import { useSession } from "@supabase/auth-helpers-react";
 import { supabase } from "@/utils/supabaseClient"; // supabaseClient をインポート
 
 export default function Header() {
-  const { session } = useAuth();
+  const session = useSession();
 
   return (
     <header>

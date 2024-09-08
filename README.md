@@ -110,6 +110,7 @@ Connection string の URI に記載された [YOUR-PASSWORD] を percent_encoded
 ```bash
 npm install
 npm install shadcn-ui
+npm install @supabase/auth-ui-react
 npx shadcn-ui@latest init
 npx shadcn-ui@latest add tooltip
 npx shadcn-ui@latest add toast

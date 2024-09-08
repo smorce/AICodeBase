@@ -10,12 +10,12 @@ import {
 } from "@/actions/example-actions";
 import { InsertExample } from "@/db/schema/example-schema";
 import { ActionState } from "@/types";
-import { useAuth } from "@supabase/auth-helpers-react";
+import { useSession } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { session } = useAuth();
+  const session = useSession();
   const router = useRouter();
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function Home() {
   return (
     <div>
       <h1>Example Actions</h1>
-      <p>Welcome, {session.user.email}!</p>
+      <p>Welcome, {session.user.email}!</p> {/* ユーザーのメールアドレスを表示 */}
       <form onSubmit={handleSubmit}>
         <h2>Create Example</h2>
         <div>
