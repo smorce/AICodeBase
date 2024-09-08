@@ -6,10 +6,9 @@ export const exampleTable = pgTable("example", {
   age: integer("age").notNull(),
   email: text("email").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at")
-    .notNull()
-    .defaultNow()
-    .$onUpdate(() => new Date())
+  updatedAt: timestamp("updated_at", { mode: 'date' })
+  .notNull()
+  .defaultNow()
 });
 
 export type InsertExample = typeof exampleTable.$inferInsert;

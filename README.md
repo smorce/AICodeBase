@@ -100,6 +100,17 @@ npm run db:generate
 npm run db:migrate
 ```
 
+実行するスクリプトは以下の通りです。
+```
+"scripts": {
+  "db:generate": "npx drizzle-kit generate:pg",
+  "db:migrate": "yes | npx drizzle-kit push:pg"
+}
+```
+- Drizzle Kit では、migrate コマンドではなく push コマンドを使用します。データベーススキーマを直接更新するためのコマンドです。
+- ユーザー確認を Skip するために Linux コマンドとして yes を使用しています。
+- generate, push する際は :pg をつけ、使用するデータベースタイプを指定する必要があります
+
 ### 6. 開発サーバーの起動
 
 以下のコマンドを実行して、開発サーバーを起動します。
