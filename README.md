@@ -302,3 +302,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - ClientWrapper.tsx（追記）
   - app/layout.tsx（更新）
   - app/page.tsx（更新）
+
+## memo
+- mainブランチはボイラーテンプレートのままにしたいため、マージはしないこと
